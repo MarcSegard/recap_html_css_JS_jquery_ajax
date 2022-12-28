@@ -91,10 +91,10 @@ $("#view-command-exit").on("click", () => {
 $("#connexion").on("click", (event) => {
   // On coupe le comportement par défaut
   event.preventDefault();
-  //
-  const viewInfosPersosRecapCommande = $(
-    "#view-confirm-infos-persos-et-panier"
-  );
+
+  const divContenu = $("#view-contenu");
+  divContenu.empty();
+
   const infosPersosFormulaire = $("#form-info-perso-command")[0];
 
   const divInfosPersosLabel = document.createElement("div");
@@ -117,7 +117,7 @@ $("#connexion").on("click", (event) => {
   );
 
   divInfosPersosLabel.append(infosPersosLabel);
-  viewInfosPersosRecapCommande.append(divInfosPersosLabel);
+  divContenu.append(divInfosPersosLabel);
   for (let i = 0; i < 5; i++) {
     const divInfoPerso = document.createElement("div");
     divInfoPerso.classList.add("m-1");
@@ -134,7 +134,7 @@ $("#connexion").on("click", (event) => {
     }</b>`;
 
     divFirstRow.append(divInfoPerso);
-    viewInfosPersosRecapCommande.append(divFirstRow);
+    divContenu.append(divFirstRow);
   }
 
   const divPanierLabel = document.createElement("div");
@@ -149,7 +149,7 @@ $("#connexion").on("click", (event) => {
   );
 
   divPanierLabel.append(panierLabel);
-  viewInfosPersosRecapCommande.append(divPanierLabel);
+  divContenu.append(divPanierLabel);
 
   const divRowProducts = document.createElement("div");
 
@@ -177,7 +177,7 @@ $("#connexion").on("click", (event) => {
     divRowProduct.append(infoProduct);
     infoProduct.append(priceProduct);
     infoProduct.append(quantityProduct);
-    viewInfosPersosRecapCommande.append(divRowProduct);
+    divContenu.append(divRowProduct);
   });
 
   /***Affichage coût total de la commande */
@@ -189,11 +189,10 @@ $("#connexion").on("click", (event) => {
   divTotalPrice.classList.add("alert", "alert-danger", "col-11", "m-3");
   divTotalPrice.append(totalPriceText);
 
-  viewInfosPersosRecapCommande.append(divTotalPrice);
+  divContenu.append(divTotalPrice);
 
   /****Affichage bouton */
   const divButtons = document.createElement("div");
-  const closeButton = document.createElement("button");
   const finaliserButton = document.createElement("button");
 
   divButtons.classList.add(
@@ -204,20 +203,25 @@ $("#connexion").on("click", (event) => {
     "p-3",
     "m-3"
   );
-  closeButton.classList.add("btn", "btn-secondary", "m-2");
-  finaliserButton.classList.add("btn", "btn-primary", "m-2");
 
-  closeButton.textContent = "Fermer";
+  finaliserButton.classList.add("btn", "btn-primary", "m-2");
+  finaliserButton.setAttribute("onclick", "sendCommand()");
+
   finaliserButton.textContent = "Finaliser la commande et payer";
 
-  divButtons.append(closeButton);
   divButtons.append(finaliserButton);
 
-  viewInfosPersosRecapCommande.append(divButtons);
+  divContenu.append(divButtons);
 
   $("#view-confirm-infos-persos-et-panier").show(1000);
+  $("#formulaireEnvoi").css("left", "-400px");
 });
 
 $("#view-infos-persos-et-cart-exit").on("click", function () {
+  console.log($("#view-confirm-infos-persos-et-panier")[0].children);
   $("#view-confirm-infos-persos-et-panier").hide(1000);
 });
+
+function sendCommand() {
+  document.location.href = "./redirect.html";
+}
