@@ -70,6 +70,31 @@ let bagdeNbreItems = $("#numberItems")[0];
 const cartView = $("#cart-items");
 let globalTotalPrice = 0;
 
+var app = document.getElementById("type-writer");
+
+var typewriter = new Typewriter(app, {
+  loop: true,
+  delay: 75,
+});
+
+typewriter
+  .pauseFor(500)
+  .typeString('C\'est <span style="color: red; font-weight: bold;">NOEL</span>')
+  .typeString(
+    ', je peux maintenant m\'amuser avec: <span style="color: red; font-weight: bold;">HTML</span>'
+  )
+  .pauseFor(300)
+  .deleteChars(4)
+  .typeString('<span style="color: red; font-weight: bold;">CSS</span>')
+  .pauseFor(300)
+  .deleteChars(3)
+  .typeString('<span style="color: red; font-weight: bold;">Javascript</span>')
+  .pauseFor(300)
+  .deleteChars(10)
+  .typeString('<span style="color: red; font-weight: bold;">jQuery</span>')
+  .pauseFor(1000)
+  .start();
+
 /**********************************************************************************************************************************/
 /****************************** construction et injection des cartes produit dans la vue principale ********************************/
 produits.forEach((element) => {

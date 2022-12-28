@@ -26,10 +26,11 @@
     ></script>
     <!-- jQuery -->
     <script src="./script/jquery-3.6.2.min.js"></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg bg-black">
+      <nav class="navbar navbar-dark navbar-expand-lg bg-black">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
           <button
@@ -86,7 +87,10 @@
         </div>
       </nav>
     </header>
-    <img class="w-100" src="./assets/BouleNoel.jpg" alt="" />
+    <div id="accueil">
+      <img class="w-100" src="./assets/BouleNoel.jpg" alt="" />
+      <div id="type-writer" class="fs-1"></div>
+    </div>
     <div class="container d-flex flex-wrap justify-content-between"></div>
     <div id="view-cart">
       <div class="row">
@@ -147,9 +151,11 @@
     </div>
     <div id="view-confirm-infos-persos-et-panier">
       <div class="row">
-        <p class="fs-4 col-9 m-3">Valider mes informations et mon panier</p>
+        <p class="fs-4 col-10 ms-3 mt-3">
+          Valider mes informations et mon panier
+        </p>
         <i
-          class="col-2 m-0 bi bi-x-square fs-1 text-end"
+          class="col-1 m-0 bi bi-x-square fs-1 text-end"
           id="view-infos-persos-et-cart-exit"
         ></i>
         <div id="view-contenu"></div>

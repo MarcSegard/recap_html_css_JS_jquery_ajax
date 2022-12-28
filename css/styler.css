@@ -2,6 +2,16 @@
   position: relative;
 }
 
+#accueil {
+  position: relative;
+}
+
+#type-writer {
+  position: absolute;
+  top: calc(100vh - 50%);
+  left: 25%;
+}
+
 #numberItems {
   color: white;
   background-color: rgb(188, 15, 15);

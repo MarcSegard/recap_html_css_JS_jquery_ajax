@@ -15,8 +15,8 @@ const getMessageRegex = (idElement) => {
   let message = "";
   switch (idElement) {
     case "firstName":
-      regex = /^\w{5,15}$/;
-      message = "Le prénom doit contenir entre 5 et 15 caractères";
+      regex = /^\w{4,15}$/;
+      message = "Le prénom doit contenir entre 4 et 15 caractères";
       break;
     case "lastName":
       regex = /^\w{5,15}$/;
