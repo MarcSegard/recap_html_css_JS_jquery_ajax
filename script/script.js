@@ -67,6 +67,8 @@ var produits = [
 
 let myCart = [];
 let bagdeNbreItems = $("#numberItems")[0];
+const cartView = $("#cart-items");
+let globalTotalPrice = 0;
 
 /**********************************************************************************************************************************/
 /****************************** construction et injection des cartes produit dans la vue principale ********************************/
@@ -117,21 +119,12 @@ produits.forEach((element) => {
 
 // Gestion du click sur le bouton "Voir le panier de la nav bar"
 $("#nav-btn-cart").on("click", function () {
-  const cartView = $("#cart-items");
   // Avant d'afficher quoi que ce soit, on vide la vue
   cartView.empty();
+  console.log(bagdeNbreItems.textContent);
   //Si le panier est vide
-  if (myCart.length == 0) {
-    const emptyCartImage = document.createElement("img");
-    const emptyCartText = document.createElement("p");
-    emptyCartImage.setAttribute("src", "../assets/empty-cart.png");
-    emptyCartImage.style.width = "100%";
-    emptyCartText.append(
-      document.createTextNode("Votre panier est tristement vide")
-    );
-    emptyCartText.classList.add("fs-5", "ms-3");
-    cartView.append(emptyCartImage);
-    cartView.append(emptyCartText);
+  if (bagdeNbreItems.textContent === "0") {
+    designEmptyCartView();
   } else {
     const synthesisCommand = document.createElement("div");
     const firstRowSynthesisCommand = document.createElement("div");
@@ -183,7 +176,7 @@ $("#nav-btn-cart").on("click", function () {
         "p-0",
         "delete-button"
       );
-      deleteProductButton.setAttribute("onclick", "deleteClick()");
+      deleteProductButton.setAttribute("onclick", "deleteClick(this)");
       secondRowViewCard.classList.add(
         "row",
         "d-flex",
@@ -217,7 +210,7 @@ $("#nav-btn-cart").on("click", function () {
       viewProductCard.append(thirdRowViewCard);
       cartView.append(viewProductCard);
     });
-    updateTotalPrice();
+    updateTotalPriceAndBadge();
   }
   $("#view-cart").css("left", "calc(100vw - 500px)");
 });
@@ -236,13 +229,14 @@ $(".add-cart-button").on("click", function () {
   let isInMyCart = false;
 
   bagdeNbreItems.textContent = "" + (parseInt(bagdeNbreItems.textContent) + 1);
+  badgeIsVisible();
 
   // On teste pour savoir si le produit est déjà présent dans le panier
   // Si oui, on augmente la quantité de 1
   myCart.forEach((item) => {
     if (nameSelectedProduct.toUpperCase() === item.get("name")) {
       isInMyCart = true;
-      item.set("quantity", item.get("quantity") + 1);
+      item.set("quantity", parseInt(item.get("quantity") + 1));
     }
   });
 
@@ -258,13 +252,6 @@ $(".add-cart-button").on("click", function () {
     myCart.push(product);
     isInMyCart = false;
   }
-
-  // Gestion du bagde au dessus du bouton "Voir mon panier" de la nav bar
-  if (bagdeNbreItems.textContent === "0") {
-    bagdeNbreItems.style.visibility = "hidden";
-  } else {
-    bagdeNbreItems.style.visibility = "visible";
-  }
 });
 
 //Gestion du changement des quantités dans la vue du panier
@@ -278,22 +265,71 @@ function quantityChange(element) {
     if (product.get("name").toUpperCase() === nameInputProduct) {
       product.set("quantity", quantityInputProduct);
     }
-    updateTotalPrice();
+    updateTotalPriceAndBadge();
   });
 }
+
 //Destion du bouton de supression article dans la vue panier
-function deleteClick() {
-  console.log("Je supprime");
+function deleteClick(element) {
+  const nameDeletedProduct =
+    element.parentNode.parentNode.children[0].children[0].children[0]
+      .textContent;
+  let indexDeletedProduct = 0;
+  myCart.forEach((product, index) => {
+    if (product.get("name").toUpperCase() === nameDeletedProduct) {
+      indexDeletedProduct = index;
+    }
+  });
+  delete myCart[indexDeletedProduct];
+  element.parentNode.parentNode.remove();
+  updateTotalPriceAndBadge();
+  if (bagdeNbreItems.textContent === "0") {
+    designEmptyCartView();
+  }
 }
 
 function validationCommande() {
   console.log("Ja valide ma commande");
+  $("#view-cart").css("left", "100vw");
+  $("#formulaireEnvoi").css("left", "0px");
 }
 
-function updateTotalPrice() {
+function updateTotalPriceAndBadge() {
   let totalPrice = 0;
+  let totalQuantity = 0;
   myCart.forEach((element) => {
     totalPrice += parseInt(element.get("quantity")) * element.get("price");
+    totalQuantity += parseInt(element.get("quantity"));
   });
+  if (totalQuantity.toString() === "") {
+    bagdeNbreItems.textContent = "0";
+  } else {
+    bagdeNbreItems.textContent = totalQuantity.toString();
+  }
+  badgeIsVisible();
   $("#prixTotal")[0].innerHTML = `<b>Total: ${totalPrice}€</b>`;
+  globalTotalPrice = totalPrice;
+}
+
+function designEmptyCartView() {
+  cartView.empty();
+  const emptyCartImage = document.createElement("img");
+  const emptyCartText = document.createElement("p");
+  emptyCartImage.setAttribute("src", "../assets/empty-cart.png");
+  emptyCartImage.style.width = "100%";
+  emptyCartText.append(
+    document.createTextNode("Votre panier est tristement vide")
+  );
+  emptyCartText.classList.add("fs-5", "ms-3");
+  cartView.append(emptyCartImage);
+  cartView.append(emptyCartText);
+}
+
+function badgeIsVisible() {
+  // Gestion du bagde au dessus du bouton "Voir mon panier" de la nav bar
+  if (bagdeNbreItems.textContent === "0") {
+    bagdeNbreItems.style.visibility = "hidden";
+  } else {
+    bagdeNbreItems.style.visibility = "visible";
+  }
 }
