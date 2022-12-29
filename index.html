@@ -28,7 +28,7 @@
     <script src="./script/jquery-3.6.2.min.js"></script>
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
   </head>
-  <body>
+  <div>
     <header>
       <nav class="navbar navbar-dark navbar-expand-lg bg-black">
         <div class="container-fluid">
@@ -87,11 +87,11 @@
         </div>
       </nav>
     </header>
-    <div id="accueil">
+    <div id="accueil" class="main-opacity">
       <img class="w-100" src="./assets/BouleNoel.jpg" alt="" />
       <div id="type-writer" class="fs-1"></div>
     </div>
-    <div class="container d-flex flex-wrap justify-content-between"></div>
+    <div class="container main-opacity d-flex flex-wrap justify-content-between">
     <div id="view-cart">
       <div class="row">
         <p class="fs-4 col-6 m-3">Mon panier</p>
@@ -102,6 +102,7 @@
       </div>
       <div id="cart-items"></div>
     </div>
+  </div>
     <div id="formulaireEnvoi">
       <div class="row">
         <p class="fs-4 col-9 m-3">Valider ma commande</p>
@@ -141,7 +142,8 @@
         </div>
         <div class="inputDiv mt-3 mx-3">
           <label class="form-label fs-6">Adresse*</label>
-          <textarea class="col-12" id="message" rows="3" cols="40"></textarea>
+          <input class="champ col-12" id="message" type="text" />
+          <div class="info" id="messageInfo"></div>
         </div>
         <div class="fst-italic fs-6 mx-3" id="title">*: Required fields</div>
         <div id="connect">

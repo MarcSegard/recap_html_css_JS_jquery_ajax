@@ -69,6 +69,7 @@ let myCart = [];
 let bagdeNbreItems = $("#numberItems")[0];
 const cartView = $("#cart-items");
 let globalTotalPrice = 0;
+const mainOpacity = $(".main-opacity")[0];
 
 var app = document.getElementById("type-writer");
 
@@ -145,6 +146,7 @@ produits.forEach((element) => {
 // Gestion du click sur le bouton "Voir le panier de la nav bar"
 $("#nav-btn-cart").on("click", function () {
   // Avant d'afficher quoi que ce soit, on vide la vue
+  mainOpacity.style.opacity = "0.6";
   cartView.empty();
   console.log(bagdeNbreItems.textContent);
   //Si le panier est vide
@@ -243,6 +245,7 @@ $("#nav-btn-cart").on("click", function () {
 // Gestion du click sur le cross button de la vue du panier
 $("#view-cart-exit").on("click", function () {
   $("#view-cart").css("left", "100vw");
+  mainOpacity.style.opacity = "1";
 });
 
 //Gestion du click sur le bouton "dans mon panier" sur les cartes produits
@@ -314,7 +317,6 @@ function deleteClick(element) {
 }
 
 function validationCommande() {
-  console.log("Ja valide ma commande");
   $("#view-cart").css("left", "100vw");
   $("#formulaireEnvoi").css("left", "0px");
 }

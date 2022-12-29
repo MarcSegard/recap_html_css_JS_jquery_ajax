@@ -15,11 +15,11 @@ const getMessageRegex = (idElement) => {
   let message = "";
   switch (idElement) {
     case "firstName":
-      regex = /^\w{4,15}$/;
+      regex = /^[\wéèà]{4,15}$/;
       message = "Le prénom doit contenir entre 4 et 15 caractères";
       break;
     case "lastName":
-      regex = /^\w{5,15}$/;
+      regex = /^[\wéèà]{5,15}$/;
       message = "Le nom doit contenir entre 5 et 15 caractères";
       break;
     case "email":
@@ -30,6 +30,9 @@ const getMessageRegex = (idElement) => {
       regex = /^\d{10}$/;
       message = "Le numéro doit contenir 10 chiffres";
       break;
+    case "message":
+      regex = /\d{1,3}[\w\séèà]+\d{5}[\w\s\-éèà]+/;
+      message = "L'adresse doit être de la forme : 2 rue Luois 75014 Paris";
   }
   return [regex, message];
 };
@@ -85,6 +88,7 @@ Object.values(champs).forEach((element) => {
 });
 
 $("#view-command-exit").on("click", () => {
+  mainOpacity.style.opacity = "1";
   $("#formulaireEnvoi").css("left", "-400px");
 });
 
@@ -218,7 +222,7 @@ $("#connexion").on("click", (event) => {
 });
 
 $("#view-infos-persos-et-cart-exit").on("click", function () {
-  console.log($("#view-confirm-infos-persos-et-panier")[0].children);
+  mainOpacity.style.opacity = "1";
   $("#view-confirm-infos-persos-et-panier").hide(1000);
 });
 
