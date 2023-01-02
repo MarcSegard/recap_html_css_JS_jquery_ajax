@@ -1,69 +1,85 @@
-var produits = [
-  {
-    nom: "Blouson Cuir Homme OSX",
-    image:
-      "https://s1.rockagogostatic.com/ref/pls/pls15/blouson-cuir-mec-marque-osx-brando-jacket-pr.jpg",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 225,
+// var produits = [
+//   {
+//     nom: "Blouson Cuir Homme OSX",
+//     image:
+//       "https://s1.rockagogostatic.com/ref/pls/pls15/blouson-cuir-mec-marque-osx-brando-jacket-pr.jpg",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 225,
+//   },
+//   {
+//     nom: "POLO CINTRE SLIM FIT EN COTON BASIC Bleu",
+//     image:
+//       "https://media.istockphoto.com/id/1317905872/fr/photo/maquette-de-chemise-%C3%A0-col-vierge-dans-les-vues-avant-lat%C3%A9rales-et-arri%C3%A8re.jpg?s=612x612&w=0&k=20&c=XVtGOUELvqJqlkbzAMXAJ73Mmg_AD2uV7FbCdVCPlNY=",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 75,
+//   },
+//   {
+//     nom: "Robe rose croisée à boucler",
+//     image:
+//       "https://m1.quebecormedia.com/emp/emp/A1_2_1_d64e884e-d21e-41ab-8eb0-2baf6b656c00_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=0&w=802&h=1086&width=925&height=925",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 50,
+//   },
+//   {
+//     nom: "Sneakers Adidas Original Homme",
+//     image:
+//       "https://www.kiffoo.com/7220-large_default/basket-adidas-original-homme.jpg",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 159,
+//   },
+//   {
+//     nom: "Pantalon jogging Nike Just Do It - Noir",
+//     image:
+//       "https://api.vs.prod.footkorner.nbs-aws.com/img/600/744/resize/catalog/product/f/o/footkorner-pantalon-nike-just-do-it-cu4050-010-noir_1_.jpeg",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 27,
+//   },
+//   {
+//     nom: "Sportwear Femme Gris",
+//     image:
+//       "https://contents.mediadecathlon.com/p1691566/k$863fad91e6bb4a2de8373ca10dfc3a53/sq/sous-vetements-thermique.jpg?format=auto&f=800x0",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 20,
+//   },
+//   {
+//     nom: "Doudoune Rouge Homme",
+//     image:
+//       "https://www.cdiscount.com/pdt2/2/7/7/1/700x700/mp40057277/rw/doudoune-rouge-homme-marque-duvet-de-canard-blanc.jpg",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 60,
+//   },
+//   {
+//     nom: "UNDER ARMOUR BLITZING 3.0 MARINE",
+//     image:
+//       "https://medias.go-sport.com/media/resized/340x/catalog/product/01/50/71/39/blitzing-30-marine_1_v1.jpg",
+//     description:
+//       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
+//     prix: 22,
+//   },
+// ];
+var produits = [];
+
+$.ajax({
+  url: "https://fakestoreapi.com/products?limit=20",
+  dataType: "json",
+  async: false, //pour être certain que les données soient chargées au lancement du programme
+  cache: false,
+
+  success: function (data) {
+    produits = data;
   },
-  {
-    nom: "POLO CINTRE SLIM FIT EN COTON BASIC Bleu",
-    image:
-      "https://media.istockphoto.com/id/1317905872/fr/photo/maquette-de-chemise-%C3%A0-col-vierge-dans-les-vues-avant-lat%C3%A9rales-et-arri%C3%A8re.jpg?s=612x612&w=0&k=20&c=XVtGOUELvqJqlkbzAMXAJ73Mmg_AD2uV7FbCdVCPlNY=",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 75,
+
+  error: function (xhr) {
+    console.log(xhr.status);
   },
-  {
-    nom: "Robe rose croisée à boucler",
-    image:
-      "https://m1.quebecormedia.com/emp/emp/A1_2_1_d64e884e-d21e-41ab-8eb0-2baf6b656c00_ORIGINAL.jpg?impolicy=crop-resize&x=0&y=0&w=802&h=1086&width=925&height=925",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 50,
-  },
-  {
-    nom: "Sneakers Adidas Original Homme",
-    image:
-      "https://www.kiffoo.com/7220-large_default/basket-adidas-original-homme.jpg",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 159,
-  },
-  {
-    nom: "Pantalon jogging Nike Just Do It - Noir",
-    image:
-      "https://api.vs.prod.footkorner.nbs-aws.com/img/600/744/resize/catalog/product/f/o/footkorner-pantalon-nike-just-do-it-cu4050-010-noir_1_.jpeg",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 27,
-  },
-  {
-    nom: "Sportwear Femme Gris",
-    image:
-      "https://contents.mediadecathlon.com/p1691566/k$863fad91e6bb4a2de8373ca10dfc3a53/sq/sous-vetements-thermique.jpg?format=auto&f=800x0",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 20,
-  },
-  {
-    nom: "Doudoune Rouge Homme",
-    image:
-      "https://www.cdiscount.com/pdt2/2/7/7/1/700x700/mp40057277/rw/doudoune-rouge-homme-marque-duvet-de-canard-blanc.jpg",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 60,
-  },
-  {
-    nom: "UNDER ARMOUR BLITZING 3.0 MARINE",
-    image:
-      "https://medias.go-sport.com/media/resized/340x/catalog/product/01/50/71/39/blitzing-30-marine_1_v1.jpg",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non, laboriosam.",
-    prix: 22,
-  },
-];
+});
 
 let myCart = [];
 let bagdeNbreItems = $("#numberItems")[0];
@@ -99,6 +115,7 @@ typewriter
 /**********************************************************************************************************************************/
 /****************************** construction et injection des cartes produit dans la vue principale ********************************/
 produits.forEach((element) => {
+  console.log(element);
   const card = document.createElement("div");
   const divCardImage = document.createElement("div");
   const cardImage = document.createElement("img");
@@ -128,9 +145,9 @@ produits.forEach((element) => {
 
   cardImage.setAttribute("src", element.image);
   divCardImage.append(cardImage);
-  cardTitle.append(document.createTextNode(element.nom.toUpperCase()));
+  cardTitle.append(document.createTextNode(element.title.toUpperCase()));
   cardTextDescription.append(document.createTextNode(element.description));
-  cardTextPrix.append(document.createTextNode(`Prix : ${element.prix}€`));
+  cardTextPrix.append(document.createTextNode(`Prix : ${element.price}€`));
   cardButton.append(document.createTextNode("Ajouter au panier"));
   cardBody.append(cardTitle);
   cardBody.append(cardTextDescription);
