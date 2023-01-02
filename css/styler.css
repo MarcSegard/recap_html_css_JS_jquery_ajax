@@ -3,13 +3,16 @@
 }
 
 #accueil {
+  background: url("../assets/BouleNoel.jpg") center/cover;
+  height: 100vh;
   position: relative;
 }
 
 #type-writer {
   position: absolute;
-  top: calc(100vh - 50%);
-  left: 25%;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 10%;
 }
 
 #numberItems {
